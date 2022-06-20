@@ -11,7 +11,7 @@ class ProductsListSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source='model.name')
     photos = serializers.SlugRelatedField(many=True, read_only=True, slug_field='image_url')
     available = serializers.CharField()
-    price = serializers.CharField(source='model.get_formatted_price_display')
+    price = serializers.CharField(source='model.get_price_display')
     discount = serializers.DictField(source='get_discount',)
 
     class Meta:
