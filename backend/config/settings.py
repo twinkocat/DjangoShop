@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'phonenumber_field',
     'debug_toolbar',
 
+    'users',
     'products',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+
+    'config.middleware.global_current_user.set_global_user',
 ]
 
 # settings for debug toolbar
@@ -61,6 +66,20 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+# Custom user model
+AUTH_USER_MODEL = 'users.User'
+
+# Phone format for phone_number
+PHONENUMBER_DEFAULT_FORMAT = "INTERNATIONAL"
+
+# DRF SETTINGS
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 
 ROOT_URLCONF = 'config.urls'
