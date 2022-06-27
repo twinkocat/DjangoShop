@@ -1,15 +1,17 @@
 from babel.numbers import format_decimal
 from decimal import Decimal
 
+"""in future i want to realize a changeble value for current user"""
+
 
 def format_price(price: Decimal) -> str:
-    """Формат валюты"""
+    """Formated price UAH current"""
     if price is not None and price:
         return f'{price} UAH'
 
 
 def get_discount(discount, price: Decimal) -> dict:
-    """Расчет скидки и формат стоимости"""
+    """Calculate discount price"""
     if discount is not None and discount:
         discount_price = price - (price * discount.value)
         return {
@@ -20,7 +22,7 @@ def get_discount(discount, price: Decimal) -> dict:
 
 
 def check_available(count, product):
-    """Проверка на наличие на складе"""
+    """Check available in stock"""
     if count != 0:
         product.available = True
     else:
@@ -28,7 +30,7 @@ def check_available(count, product):
 
 
 def formatted_available(available) -> str:
-    """Формат поля 'В наличии ' в зависимости от аргумента, не есть правильно для фроненда(Сашка)"""
+    """Not used on this moment"""
     if available is True:
         return 'В наличии'
     if available is False:
@@ -36,6 +38,6 @@ def formatted_available(available) -> str:
 
 
 def product_photo_path(instance, filename):
-    """Папка хранения фотографий продукта"""
+    """make a folder for photo model products"""
     path = f'product_photos/{instance.product.brand}-{instance.product.model}/{filename}'
     return path.replace(' ', '-')
