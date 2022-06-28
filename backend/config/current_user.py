@@ -6,6 +6,8 @@ from users.models import User
 
 _thread_locals = local()
 
+"""this service i used from another project. Not my develope"""
+
 
 def get_current_user() -> Optional[User]:
     user = getattr(_thread_locals, _thread_key(), None)
