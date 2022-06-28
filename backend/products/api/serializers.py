@@ -19,5 +19,6 @@ class ProductsListSerializer(serializers.ModelSerializer):
         fields = ['type', 'brand', 'name', 'photos', 'available', 'price', 'discount',]
 
     def to_representation(self, instance):
+        """exclude Null fields """
         result = super(ProductsListSerializer, self).to_representation(instance)
         return OrderedDict([(key, result[key]) for key in result if result[key] is not None])
