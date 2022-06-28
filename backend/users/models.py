@@ -3,7 +3,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class User(AbstractUser):
-    phone = PhoneNumberField(blank=True, default='', db_index=True, unique=True)
+    phone = PhoneNumberField(blank=True, default='', db_index=True)
 
     class Meta(AbstractUser.Meta):
         abstract = False
