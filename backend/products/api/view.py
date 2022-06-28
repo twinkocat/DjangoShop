@@ -6,7 +6,10 @@ from products.paginations import StandardResultsSetPagination
 
 
 class ProductsListViewSet(ReadOnlyModelViewSet):
-    queryset = Product.objects.all().select_related('type', 'brand', 'discount').prefetch_related('model', 'photos')
+    queryset = Product.objects.all().\
+        select_related('type', 'brand', 'discount').\
+        prefetch_related('model', 'photos').\
+        order_by('id')
     serializer_class = ProductsListSerializer
     pagination_class = StandardResultsSetPagination
 
