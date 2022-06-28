@@ -4,7 +4,7 @@ from products.models.type import Type
 from products.models.brand import Brand
 from products.models.model import Model
 from products.models.discounts import Discount
-from products.services import formatted_available, get_discount, check_available
+from products.services import get_discount, check_available
 
 
 class Product(models.Model):
@@ -26,9 +26,6 @@ class Product(models.Model):
         check_available(self.model.count, self)
 
         super().save(*args, **kwargs)
-
-    def get_formatted_available(self):
-        return formatted_available(self.available)
 
     def get_discount(self):
         return get_discount(self.discount, self.model.price)
