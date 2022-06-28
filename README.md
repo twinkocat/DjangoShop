@@ -1,20 +1,20 @@
 # DjangoShop
-
-Users
 _______________________
+Users
+
 register user
 http://127.0.0.1:8000/api/v1/users/register/
-
-Products
 _______________________
+Products
+
 show all products
 http://127.0.0.1:8000/api/v1/products/
 
 or show detail product from ID
 http://127.0.0.1:8000/api/v1/products/<:id>/
-
-Orders
 _______________________
+Orders
+
 show orders for current user only
 http://127.0.0.1:8000/api/v1/orders/my/
 
