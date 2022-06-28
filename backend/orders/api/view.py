@@ -1,6 +1,6 @@
 
 from rest_framework import permissions
-from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
 
 from config.current_user import get_current_user
 from orders.api.serializers import OrderSelfSerializer, OrderCreateSerializer
@@ -16,6 +16,18 @@ class OrderSelfView(ListAPIView):
         return Order.objects.\
             select_related('user').\
             prefetch_related('product').\
+            filter(user=user)   # or self.request.user
+
+
+class OrderDetailView(RetrieveAPIView):
+    serializer_class = OrderSelfSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = get_current_user()
+        return Order.objects. \
+            select_related('user'). \
+            prefetch_related('product'). \
             filter(user=user)  # or self.request.user
 
 
