@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Avg
 
 from orders.services import calculate_price
 from products.models import Product
