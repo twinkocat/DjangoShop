@@ -1,13 +1,19 @@
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import QuerySet
 from rest_framework import permissions
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, CreateAPIView
 from rest_framework.response import Response
 
 from config.current_user import get_current_user
 from users.api.serializers import UserSerializer
 from users.models import User
 from users.services import UserUpdater
+from users.services.user_creator import UserCreateSerializer
+
+
+class RegisterView(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserCreateSerializer
 
 
 class SelfView(GenericAPIView):
