@@ -1,7 +1,6 @@
-from django.db.models import Avg
 
 
-def calculate_price(product):
+def calculate_order_price(product):
     """calculate order price for show current user total price buying products"""
     price_value = product.values_list('model__price', flat=True)
     discount_value = product.values_list('discount__value', flat=True)

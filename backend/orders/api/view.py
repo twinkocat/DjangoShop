@@ -14,8 +14,8 @@ class OrderSelfView(ListAPIView):
     def get_queryset(self):
         user = get_current_user()
         return Order.objects.\
-            select_related('user').\
-            prefetch_related('product').\
+            select_related('user'). \
+            prefetch_related('items'). \
             filter(user=user)   # or self.request.user
 
 
@@ -27,7 +27,7 @@ class OrderDetailView(RetrieveAPIView):
         user = get_current_user()
         return Order.objects. \
             select_related('user'). \
-            prefetch_related('product'). \
+            prefetch_related('items'). \
             filter(user=user)  # or self.request.user
 
 
@@ -37,8 +37,7 @@ class OrderCreateView(CreateAPIView):
 
     def get_queryset(self):
         return Order.objects.\
-            select_related('user').\
-            prefetch_related('product')
+            select_related('user')
 
     def perform_create(self, serializer):
         user = get_current_user()
