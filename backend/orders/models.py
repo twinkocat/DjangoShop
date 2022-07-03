@@ -1,6 +1,5 @@
 from django.db import models
 
-from orders.services import calculate_order_price
 from products.models import Product
 
 from users.models import User
@@ -16,12 +15,6 @@ class Order(models.Model):
 
     def __str__(self):
         return f'User:{self.user}|Total price:{self.total_price}'
-
-    def save(self, *args, **kwargs):
-
-        calculate_order_price(self.items)
-
-        super().save(*args, **kwargs)
 
 
 class OrderItem(models.Model):
