@@ -14,10 +14,13 @@ class Order(models.Model):
         ordering = ['-created_at', ]
 
     def __str__(self):
-        return f'User:{self.user}|Total price:{self.total_price}'
+        return f'Order ID:{self.id} ||| User:{self.user}|Total price:{self.total_price}'
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, related_name='items', on_delete=models.PROTECT, blank=True)
+    order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE, blank=True)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     quantity = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f'Order ID:{self.order.id} ||| Customer:{self.order.user} ||| Product:{self.product}'

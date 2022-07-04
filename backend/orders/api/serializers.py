@@ -1,7 +1,8 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
 
-from orders.services import calculate_order_price
 from orders.models import Order, OrderItem
+from products.models import Product
 
 
 class OrderItemSerializer(serializers.ModelSerializer):

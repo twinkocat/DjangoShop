@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('api/v1/users/', include('users.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
-    path('api/v1/orders/', include('orders.urls'))
+    path('api/v1/orders/', include('orders.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
