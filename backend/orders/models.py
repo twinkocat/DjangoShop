@@ -1,6 +1,7 @@
 from django.db import models
 
 from products.models import Product
+from products.services import format_price
 
 from users.models import User
 
@@ -14,7 +15,10 @@ class Order(models.Model):
         ordering = ['-created_at', ]
 
     def __str__(self):
-        return f'Order ID:{self.id} ||| User:{self.user}|Total price:{self.total_price}'
+        return f'Order ID:{self.id} ||| User:{self.user}|Total price:{self.total_price} UAH'
+
+    def get_formatted_total_price(self):
+        return format_price(self.total_price)
 
 
 class OrderItem(models.Model):
