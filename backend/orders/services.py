@@ -7,13 +7,10 @@ def calculate_order_price(items):
     for item in items:
         price = item.get('product').model.price
         quantity = item.get('quantity')
-        try:
+        if item.get('product').discount:
             discount = item.get('product').discount.value
             total_price.append((price - price * discount) * quantity)
-        except AttributeError:
-            # method get apply this exception because getting NonType(haven`t field discount in data)
+        else:
             total_price.append(price * quantity)
 
     return sum(total_price)
-
-
