@@ -23,3 +23,23 @@ http://127.0.0.1:8000/api/v1/orders/my/<:id>/
 
 create order with current login user
 http://127.0.0.1:8000/api/v1/orders/create/ 
+
+for create order need authenticate and type json in Raw data: 
+quantity product and product id
+
+{
+        "items": [
+            {
+                "quantity": 3,
+                "product": 1
+            },
+            {
+                "quantity": 3,
+                "product": 2
+            },
+            {
+                "quantity": 3,
+                "product": 3
+            },
+        ],
+}
