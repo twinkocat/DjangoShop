@@ -38,6 +38,7 @@ class SelfOrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSelfSerializer(serializers.ModelSerializer):
     items = SelfOrderItemSerializer(many=True)
+    total_price = serializers.CharField(source='get_formatted_total_price')
 
     class Meta:
         model = Order

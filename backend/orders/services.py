@@ -1,25 +1,19 @@
 
 def calculate_order_price(items):
     """calculate order price for show current user total price buying products"""
-    price_order_list = []
-    quantity_order_list = []
-    discount_order_list = []
 
     total_price = []
 
     for item in items:
-        price_order_list.append(item.get('product').model.price)
-        quantity_order_list.append(item.get('quantity'))
+        price = item.get('product').model.price
+        quantity = item.get('quantity')
         try:
-            discount_order_list.append(item.get('product').discount.value)
-        except AttributeError:
-            discount_order_list.append(None)
-
-    for price, quantity, discount in zip(price_order_list, quantity_order_list, discount_order_list):
-        if discount is not None:
+            discount = item.get('product').discount.value
             total_price.append((price - price * discount) * quantity)
-        else:
+        except AttributeError:
+            # method get apply this exception because getting NonType(haven`t field discount in data)
             total_price.append(price * quantity)
 
     return sum(total_price)
+
 
