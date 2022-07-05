@@ -1,21 +1,16 @@
-from django.db.models import Avg
 
-
-def calculate_price(product):
+def calculate_order_price(items):
     """calculate order price for show current user total price buying products"""
-    price_value = product.values_list('model__price', flat=True)
-    discount_value = product.values_list('discount__value', flat=True)
 
     total_price = []
-    for price, discount in zip(price_value, discount_value):
-        if discount is not None:
-            total_price.append(price - price * discount)
-        if discount is None:
-            total_price.append(price)
+
+    for item in items:
+        price = item.get('product').model.price
+        quantity = item.get('quantity')
+        if item.get('product').discount:
+            discount = item.get('product').discount.value
+            total_price.append((price - price * discount) * quantity)
+        else:
+            total_price.append(price * quantity)
 
     return sum(total_price)
-
-
-
-
-
